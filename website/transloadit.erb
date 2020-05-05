@@ -1,0 +1,26 @@
+<% wrap_layout :inner do %>
+  <% content_for :sidebar do %>
+    <div class="docs-sidebar hidden-print affix-top" role="complementary">
+      <ul class="nav docs-sidenav">
+	<li>
+          <a href="/docs/providers/index.html">All Providers</a>
+        </li>
+
+	<li>
+          <a href="/docs/providers/transloadit/index.html">Transloadit Provider</a>
+	</li>
+
+	<li>
+	  <a href="#">Resources</a>
+          <ul class="nav nav-visible">
+            <li>
+              <a href="/docs/providers/transloadit/r/template.html">Template</a>
+            </li>
+          </ul>
+	</li>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= yield %>
+<% end %>
