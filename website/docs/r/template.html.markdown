@@ -13,6 +13,10 @@ For additional details please refer to [API documentation](https://transloadit.c
 ## Example Usage
 
 ```hcl
+provider "transloadit" {
+
+}
+
 resource "transloadit_template" "test" {
 	name = "templatebasic1"
 	template = <<EOT
