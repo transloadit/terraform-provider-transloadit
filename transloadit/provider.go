@@ -33,7 +33,6 @@ func Provider() terraform.ResourceProvider {
 			prefix + "template": resourceTemplate(),
 		},
 		ConfigureFunc: configureProvider,
-
 	}
 }
 
