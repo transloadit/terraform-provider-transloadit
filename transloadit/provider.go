@@ -1,6 +1,7 @@
 package transloadit
 
 import (
+	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 	"gopkg.in/transloadit/go-sdk.v1"
@@ -43,6 +44,9 @@ func configureProvider(d *schema.ResourceData) (interface{}, error) {
 	}
 	options.AuthKey = d.Get("auth_key").(string)
 	options.AuthSecret = d.Get("auth_secret").(string)
+	if options.AuthKey == "" || options.AuthSecret == "" {
+		fmt.Errorf("Missing TransloadIt AuthKey ot AuthSecret")
+	}
 	client := transloadit.NewClient(options)
 	return &client, nil
 }
