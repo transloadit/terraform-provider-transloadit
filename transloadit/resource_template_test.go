@@ -1,20 +1,26 @@
 package transloadit
 
 import (
+	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+	"math/rand"
 	"testing"
 )
 
 func TestAccTemplate_basic(t *testing.T) {
 
+	resource_name := fmt.Sprintf("templatebasic%d", rand.Int()%1000)
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccTemplate_basic_1,
-				Check:  nil,
+				Config: fmt.Sprintf(testAccTemplate_basic_1, resource_name),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckExistingResource("transloadit_template.test"),
+					resource.TestCheckResourceAttr("transloadit_template.test", "name", resource_name),
+				),
 			},
 		},
 	})
@@ -22,7 +28,7 @@ func TestAccTemplate_basic(t *testing.T) {
 
 const testAccTemplate_basic_1 = `
 resource "transloadit_template" "test" {
-	name = "templatebasic1"
+	name = "%s"
 	template = <<EOT
     {
   "steps": {
