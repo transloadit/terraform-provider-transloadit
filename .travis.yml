@@ -1,38 +1,38 @@
 dist: bionic
 sudo: false
 services:
-  - docker
+- docker
 language: go
-
 script:
-  - make test
-  - make vet
-#  - make website-test
-
+- make test
+- make vet
 branches:
   only:
-    - master
-
+  - master
 matrix:
   fast_finish: true
   allow_failures:
-    - go: tip
+  - go: tip
   include:
-    - go: "1.12.x"
-      env: GOFLAGS=-mod=vendor GO111MODULE=on
-    - go: "1.13.x"
-      env: GOFLAGS=-mod=vendor
-    - go: "tip"
-      env: GOFLAGS=-mod=vendor
-    - go: "1.13.x"
-      env: GOFLAGS=-mod=vendor GOARCH=arm
-      script:
-        - make build
-    - go: "1.13.x"
-      env: GOFLAGS=-mod=vendor GOARCH=amd64
-      script:
-        - make build
-    - go: "1.13.x"
-      env: GOFLAGS=-mod=vendor GOOS=windows
-      script:
-        - make build
+  - go: 1.12.x
+    env: GOFLAGS=-mod=vendor GO111MODULE=on
+  - go: 1.13.x
+    env: GOFLAGS=-mod=vendor
+  - go: tip
+    env: GOFLAGS=-mod=vendor
+  - go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=arm
+    script:
+    - make build
+  - go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=amd64
+    script:
+    - make build
+  - go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOOS=windows
+    script:
+    - make build
+env:
+  global:
+  - secure: beVDMEk2KSHTTZ5FWaBuWbR+rc2Uz+QA7yGv813czPY6jaIwVYcpwp3e0aX1pDMRdSP9H0dtONQ7pi65raIyJ1CC/wllA/JED7ifiNfEzXiAC6kJjTGMcnb4/6Ugg+K5Bdif8TpgQNhJyzzwUvWxq+EG979P6YZZ+3QZOM24fsgu3ppk47FU3W07IZvbo8hAYCNpdPN8KPHr1UeslnzUSToRKp0hMMIshssGpD2pj8GiCo8IAsXuTvLne1nt9fALbLSe6L4TII5GGA01WXRdqYNj8mnX8PU+Thd0ILGhhmCefHVp0RYRNklS1Pf8xTUESKR6ny4PcebkOMtCXD8a7RT/Okl9r7+NSwGZrphQ+nCF8h7W6SIj/QpSIiZ9ngKKKkYXy1BGniP2PsqC4VvhTHCcAfeD35DPQCIC3wZXGTOsqcoxgFUcnRVFAusyTKINLlxlvj2gINj2SSJlcKTxGFhnlnwqvFMQfx80bR0NhF7zb6Ii0onGh/5tCfw3MzWIY14WHTSt8D4eG/we6D8I7I3bW4X/JyIqTgzcqcr9+82b6pNVMIuw9i4Z/6vVl2I0BC9z8wYsjhB9N11rLesT+WvDBP1+SiSaXXbkj7j8lHm09sgduQvvx4yYqa03ZTyaMxnT3tKmv2iz2NvNy7ITlTnwEHR/8gCrmScPtRkcNrg=
+  - secure: OxUKXPk5KOoGWcJ0LswIu5X/mnm+vA/3PHuvRMiTfC3DjvB1sIRrR/NMHYbWKId917zhFxZOxAwXxUjqWhbzdUI2XF3NsUJBLHhl1itFYzbP6F3gkywTjo9m8qXarQWnYhfSu3A+Nej6EOoRKYMwGkfgp1DNm8iptPzYSTQdgw5SPOQerHrg1aIr2y5Gk1VzR0GAmFW7EhEcVULT/4H4ETjaiJhKkX0947GxmboeyKOiVbCKrVXxBjKiW91WkKfWwhKSqpzIy2tk/2/wrHj9/XQjirOYOA0/KIMm9UohbHv9ATXtYdXKHP0cvtXifSP2184niOiOhPwLZBdm6UsPI4IZT6D6PWhULJsZCrwoAmeBSiFRZbyG8fGHdImPIpgNVzH7HXM365ueU45WrBFitr6CmLdT87gk7KG6TllNWA0ZGL7y3kQnI3e2XF0eDbCU2F7fesf/LE0/4vUgDarF9HjAVLD0cX92qUyDPFaMWHNLkLyqF29JL/fPuWo13JF7G2jHsapSZ6m9IzCfxK1O5oud08iHc4WiVVLtt53wCFInTKyOJdd94IZJxLTadgL2x/ggrNLqXWYJmuPf4EGSeq5Tktvyh17gTTWJn2JMU4txMX7MNCHZYBhes9Hc/fbv/OgSuAVkWy3V8U9VCpX49CPu+2jDcYJMO06tpom++Ps=
