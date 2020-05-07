@@ -5,6 +5,7 @@ services:
 language: go
 script:
 - make test
+- make testacc
 - make vet
 branches:
   only:
