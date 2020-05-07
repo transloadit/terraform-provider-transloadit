@@ -30,6 +30,10 @@ func resourceTemplate() *schema.Resource {
 				Required:    true,
 				ForceNew:    false,
 				Description: "template in json",
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					bool, _ := AreEqualJSON(old, new)
+					return bool
+				},
 			},
 		},
 	}
