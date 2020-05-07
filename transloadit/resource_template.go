@@ -66,7 +66,11 @@ func resourceTemplateRead(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	d.Set("name", template.Name)
-	d.Set("template", template.Content.Steps)
+	result, err := json.Marshal(template.Content)
+	if err != nil {
+		return fmt.Errorf("Content field can't be marshalled to json +%v", template.Content)
+	}
+	d.Set("template", string(result))
 	return nil
 }
 
