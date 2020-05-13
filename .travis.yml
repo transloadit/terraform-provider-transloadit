@@ -10,6 +10,7 @@ branches:
   only:
   - master
   - release
+  - /^v\d+\.\d+\.\d+.*$/
 matrix:
   fast_finish: true
   allow_failures:
