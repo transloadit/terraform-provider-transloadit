@@ -4,6 +4,13 @@ WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=transloadit
 GOPATH?=$(HOME)/go
 
+PKG_OS?= windows darwin linux 
+PKG_ARCH?= amd64
+BASE_PATH?= $(shell pwd)
+BUILD_PATH?= $(BASE_PATH)/build
+PROVIDER := "terraform-provider-transloadit"
+VERSION ?= v0.0.0
+
 default: build
 
 build: fmtcheck
@@ -35,6 +42,23 @@ fmt:
 
 fmtcheck:
 	@sh -c "'$(CURDIR)/scripts/gofmtcheck.sh'"
+
+release: vet test
+	@for os in $(PKG_OS); do \
+		for arch in $(PKG_ARCH); do \
+			mkdir -p $(BUILD_PATH) && \
+			cd $(BASE_PATH) && \
+			if [[ "$${os}" == "windows" ]]; then OS_EXT=".exe"; echo "windows ext"; else OS_EXT=""; fi && \
+			echo "$${os} $${OS_EXT}" && \
+			rm -f $(BUILD_PATH)/$(PROVIDER)_$(VERSION)$${OS_EXT} && \
+			cgo_enabled=0 GOOS=$${os} GOARCH=$${arch} go build -o $(BUILD_PATH)/$(PROVIDER)_$(VERSION)$${OS_EXT} . && \
+			cd $(BUILD_PATH) && \
+			rm -f $(BUILD_PATH)/$(PROVIDER)_$${os}_$${arch}.tar.gz && \
+			tar -cvzf $(BUILD_PATH)/$(PROVIDER)_$${os}_$${arch}.tar.gz $(PROVIDER)_$(VERSION)$${OS_EXT} && \
+			rm -f $(PROVIDER)_$(VERSION)$${OS_EXT}; \
+		done; \
+	done;
+
 
 test-compile:
 	@if [ "$(TEST)" = "./..." ]; then \
