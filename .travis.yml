@@ -9,45 +9,51 @@ script:
 branches:
   only:
   - master
-  - release
 matrix:
   fast_finish: true
   allow_failures:
   - go: tip
   include:
-    - go: 1.12.x
+    - stage: Test
+      go: 1.12.x
       env: GOFLAGS=-mod=vendor GO111MODULE=on
-    - go: 1.13.x
+    - stage: 
+      go: 1.13.x
       env: GOFLAGS=-mod=vendor
-    - go: tip
-      env: GOFLAGS=-mod=vendor
-    - go: 1.13.x
+    - stage: 
+      go: tip
+      env: GOFLAGS=-mod=vendor 
+    - stage: 
+      go: 1.13.x
       env: GOFLAGS=-mod=vendor GOARCH=arm
-      script:
-      - make build
-    - go: 1.13.x
+      script: 
+        - make build 
+    - stage: 
+      go: 1.13.x
       env: GOFLAGS=-mod=vendor GOARCH=amd64
-      script:
-      - make build
-    - go: 1.13.x
+      script: 
+        - make build 
+    - stage: 
+      go: 1.13.x
       env: GOFLAGS=-mod=vendor GOOS=windows
-      script:
-      - make build
-
-go: 1.13.x
-before_deploy:
-- VERSION=${TRAVIS_TAG} make packages
-deploy:
-  provider: releases
-  api_key: 
-    - secure: VrqePjoOnstLHkR60YOye8TRnF1WfhBTS2dhxmwrn9SOZFNcGd4gk0rXscwPhVCs74StEFZj6Kax/7J3XpTpKMtTemW386VhljIK8C6cRttZ0M+JAf8KuMPkUM2J00zF46l9bHKXCj15ND48Ki+u3Yg2lsV7PBVaLDclj1mw30fuMSk8QNGAlyYJE51SqljYWd6S+W9ap4n2dY5Y//8s3XLYwCJvbYzpfvUAoREs+fWGBxs+/DopJeSb36Pa3AoITmWfzIYynxQIVZgwKaMysw7ed3YKwLnRRoR9Atq3B0Hbq3Ognc8+Me0RXa4XM1icR4l3c4HDLKSSXhJwxgGMBEFtnD8AsphSXX+PiTIBqdNrLw7inWOsgeIcKivYHe0STnjT+lXiDg/rRFexqDsweYMTwrWhvoYdm5d4JbFj/3YKz1r51Qf6JKeSxxQzvgzK9v6ghnGuB9yxgZc9w4FxB23tTo76bDoKPqPqDlXuQI9B19JxrUiLcuA/NQyVfiKIUpi/vrV61KZZCCwdmdcUZfVAl0i9Oc/AA1192DUqwCn3Knoat6cyY7/xc6jiF8tXlQAddQvkKGuZk2OO5L3cGtx9gmbTYeyilXqzdARzPEUe6uaS/bBDfV8T+SLwRsnwR+wRhTn+hS4pmhm4umgBMaNpFC8GIl2qzgWH2BwGelc=
-  draft: true
-  file:
-    - build/terraform-provider-transloadit_darwin_amd64.tar.gz
-    - build/terraform-provider_transloadit_linux_amd64.tar.gz
-    - build/terraform-provider_transloadit_windows_amd64.tar.gz
-  on:
-    tags: true
+      script: 
+        - make build 
+    - stage: deploy
+      go: 1.13.x
+      script: skip
+      before_deploy:
+        - VERSION=${TRAVIS_TAG} make packages
+      deploy:
+        provider: releases
+        api_key: 
+          - secure: VrqePjoOnstLHkR60YOye8TRnF1WfhBTS2dhxmwrn9SOZFNcGd4gk0rXscwPhVCs74StEFZj6Kax/7J3XpTpKMtTemW386VhljIK8C6cRttZ0M+JAf8KuMPkUM2J00zF46l9bHKXCj15ND48Ki+u3Yg2lsV7PBVaLDclj1mw30fuMSk8QNGAlyYJE51SqljYWd6S+W9ap4n2dY5Y//8s3XLYwCJvbYzpfvUAoREs+fWGBxs+/DopJeSb36Pa3AoITmWfzIYynxQIVZgwKaMysw7ed3YKwLnRRoR9Atq3B0Hbq3Ognc8+Me0RXa4XM1icR4l3c4HDLKSSXhJwxgGMBEFtnD8AsphSXX+PiTIBqdNrLw7inWOsgeIcKivYHe0STnjT+lXiDg/rRFexqDsweYMTwrWhvoYdm5d4JbFj/3YKz1r51Qf6JKeSxxQzvgzK9v6ghnGuB9yxgZc9w4FxB23tTo76bDoKPqPqDlXuQI9B19JxrUiLcuA/NQyVfiKIUpi/vrV61KZZCCwdmdcUZfVAl0i9Oc/AA1192DUqwCn3Knoat6cyY7/xc6jiF8tXlQAddQvkKGuZk2OO5L3cGtx9gmbTYeyilXqzdARzPEUe6uaS/bBDfV8T+SLwRsnwR+wRhTn+hS4pmhm4umgBMaNpFC8GIl2qzgWH2BwGelc=
+        file:
+          - build/terraform-provider-transloadit_darwin_amd64.tar.gz
+          - build/terraform-provider_transloadit_linux_amd64.tar.gz
+          - build/terraform-provider_transloadit_windows_amd64.tar.gz
+        on:
+          tags: true
+       
   
 
 env:
