@@ -48,7 +48,7 @@ release: vet test
 		for arch in $(PKG_ARCH); do \
 			mkdir -p $(BUILD_PATH) && \
 			cd $(BASE_PATH) && \
-			if [[ "$${os}" == "windows" ]]; then OS_EXT=".exe"; echo "windows ext"; else OS_EXT=""; fi && \
+			if [ "$${os}" = "windows" ]; then OS_EXT=".exe"; echo "windows ext"; else OS_EXT=""; fi && \
 			echo "$${os} $${OS_EXT}" && \
 			rm -f $(BUILD_PATH)/$(PROVIDER)_$(VERSION)$${OS_EXT} && \
 			cgo_enabled=0 GOOS=$${os} GOARCH=$${arch} go build -o $(BUILD_PATH)/$(PROVIDER)_$(VERSION)$${OS_EXT} . && \
