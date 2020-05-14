@@ -56,8 +56,8 @@ provider "transloadit" {
 }
 
 resource "transloadit_template" "my-terraform-template" {
-	name     = "my-terraform-template"
-	template = <<EOT
+  name     = "my-terraform-template"
+  template = <<EOT
 {
   "steps": {
     ":original": {
