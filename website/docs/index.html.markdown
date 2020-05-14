@@ -12,7 +12,7 @@ The provider needs to be configured with the proper credentials before it can be
 
 Use the navigation to the left to read about the available resources.
 
-# Examples
+## Examples
 
 Here is an example that will setup a web server with an additional volume, a public IP and a security group.
 
@@ -25,8 +25,9 @@ You can test this config by creating a `test.tf` and run terraform commands from
 
 ```hcl
 provider "transloadit" {
-  auth_key         = "<TRANSLOADIT-ACCESS-KEY>"
-  auth_secret      = "<TRANSLOADIT-SECRET-KEY>"
+  auth_key    = "<TRANSLOADIT-AUTH-KEY>"
+  auth_secret = "<TRANSLOADIT-AUTH-SECRET>"
+  version     = "0.1.0"
 }
 ```
 
@@ -41,7 +42,7 @@ The Transloadit provider offers two ways of providing these credentials. The fol
 
 ### Static credentials
 
-!> **Warning**: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system.
+!> **Warning**: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file, or the state file, ever be committed to a public version control system.
 
 Static credentials can be provided by adding `access_key` and `secret_key` attributes in-line in the Transloadit provider block:
 
@@ -51,6 +52,7 @@ Example:
 provider "transloadit" {
   access_key = "my-access-key"
   secret_key = "my-secret-key"
+  version    = "0.1.0"
 }
 ```
 
@@ -67,9 +69,9 @@ provider "transloadit" {}
 Usage:
 
 ```bash
-$ export TRANSLOADIT_AUTH_KEY="my-access-key"
-$ export TRANSLOADIT_AUTH_SECRET="my-secret-key"
-$ terraform plan
+export TRANSLOADIT_AUTH_KEY="my-access-key"
+export TRANSLOADIT_AUTH_SECRET="my-secret-key"
+terraform plan
 ```
 
 ## Arguments Reference

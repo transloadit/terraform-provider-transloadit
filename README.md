@@ -1,5 +1,4 @@
-Terraform Provider
-==================
+# Transloadit Terraform Provider
 
 - Website: https://www.terraform.io
 - [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
@@ -7,81 +6,109 @@ Terraform Provider
 
 <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
 
-Requirements
-------------
+## Requirements
 
 -	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
--	[Go](https://golang.org/doc/install) 1.11 (to build the provider plugin)
+-	[Go](https://golang.org/doc/install) 1.11 (only if you want to change/build the provider plugin yourself)
 
-Building The Provider
----------------------
+## Installing the provider
 
-Clone repository to: `$GOPATH/src/github.com/Etienne-Carriere/terraform-provider-transloadit`
+The recommended way to install *terraform-provider-transloadit* is to use the binary
+distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The packages are available for Linux, macOS (darwin) and Windows (all on amd64 architecture).
 
-```sh
-$ mkdir -p $GOPATH/src/github.com/Etienne-Carriere; cd $GOPATH/src/github.com/Etienne-Carriere
-$ git clone https://github.com/Etienne-Carriere/terraform-provider-transloadit.git
+Download and uncompress the latest release for your OS. This example uses the Linux binary.
+
+```bash
+mkdir -p ~/.terraform.d/plugins/
+cd ~/.terraform.d/plugins/
+curl -sSL https://github.com/transloadit/terraform-provider-transloadit/releases/download/v0.1.0/terraform-provider-transloadit_linux_amd64.tar.gz |tar xvz
 ```
 
-Enter the provider directory and build the provider
+After saving and exctracting the provider to your plugins directory, you'll want to initialize Terraform in your project so it can find the plugin.
 
-```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-transloadit
-$ make build
+```bash
+terraform init
 ```
 
-Installing the provider
------------------------
+On windows, you have to store the provider in `%APPDATA%\terraform.d\plugins` 
 
-### Installation from binaries (recommended)
+## Using the provider
 
-The recommended way to install *terraform-provider-transloadit* is use the binary
-distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The packages are available for Linux , macOS (darwin) and Windows (on amd64 architecture)
+Here's a quick example. More detailed instructions can be found in the [website directory](./website/).
 
-Download and uncompress the latest release for your OS. This example uses the linux binary.
+In `main.tf`:
 
-```sh
-$ wget https://github.com/transloadit/terraform-provider-transloadit/releases/download/v0.1.0/terraform-provider-transloadit_linux_amd64.tar.gz
-$ tar -xvf terraform-provider-transloadit*.tar.gz
+```hcl
+provider "transloadit" {
+  auth_key    = "<TRANSLOADIT-AUTH-KEY>"
+  auth_secret = "<TRANSLOADIT-AUTH-SECRET>"
+  version     = "0.1.0"
+}
+
+resource "transloadit_template" "my-terraform-template" {
+	name     = "my-terraform-template"
+	template = <<EOT
+{
+  "steps": {
+    ":original": {
+      "robot": "/upload/handle"
+    },
+    "encoded": {
+      "use": ":original",
+      "robot": "/video/encode",
+      "preset": "ipad-high",
+      "ffmpeg_stack": "v3.3.3"
+    },
+    "thumbed": {
+      "use": ":original",
+      "robot": "/video/thumbs",
+      "count": 4,
+      "ffmpeg_stack": "v3.3.3"
+    },
+    "exported": {
+      "use": [ ":original", "encoded", "thumbed"], 
+      "credentials": "YOUR_S3_CREDENTIALS",
+      "robot": "/s3/store"
+    }
+  }
+}
+EOT
+}
+
+output "cdn-resize-id" {
+  value = transloadit_template.resize-img.id
+}
 ```
 
-Now copy the binary to the Terraform's plugins folder (if this is your first plugin maybe it isn't present):
+Now on the cli, run:
 
-```sh
-$ mkdir -p ~/.terraform.d/plugins/
-$ mv terraform-provider-transloadit* ~/.terraform.d/plugins/
+```bash
+terraform plan
 ```
 
-On windows, you have to put the provider in `%APPDATA%\terraform.d\plugins` 
-
-Using the provider
-----------------------
-See in the website directory
-
-Developing the Provider
----------------------------
+## Developing the Provider
 
 If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.13+ is *required*). You'll also need to correctly setup a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
 
 To compile the provider, run `make build`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
-```sh
-$ make build
-...
-$ $GOPATH/bin/terraform-provider-transloadit
-...
+```bash
+make build
+# ...
+$GOPATH/bin/terraform-provider-transloadit
+# ...
 ```
 
 In order to test the provider, you can simply run `make test`.
 
-```sh
-$ make test
+```bash
+make test
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
 
 *Note:* Acceptance tests create real resources, and often cost money to run.
 
-```sh
-$ make testacc
+```bash
+make testacc
 ```
