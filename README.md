@@ -30,9 +30,33 @@ $ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-transloadit
 $ make build
 ```
 
+Installing the provider
+-----------------------
+
+### Installation from binaries (recommended)
+
+The recommended way to install *terraform-provider-transloadit* is use the binary
+distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The packages are available for Linux , macOS (darwin) and Windows (on amd64 architecture)
+
+Download and uncompress the latest release for your OS. This example uses the linux binary.
+
+```sh
+$ wget https://github.com/transloadit/terraform-provider-transloadit/releases/download/v0.1.0/terraform-provider-transloadit_linux_amd64.tar.gz
+$ tar -xvf terraform-provider-transloadit*.tar.gz
+```
+
+Now copy the binary to the Terraform's plugins folder (if this is your first plugin maybe it isn't present):
+
+```sh
+$ mkdir -p ~/.terraform.d/plugins/
+$ mv terraform-provider-transloadit* ~/.terraform.d/plugins/
+```
+
+On windows, you have to put the provider in `%APPDATA%\terraform.d\plugins` 
+
 Using the provider
 ----------------------
-## Fill in for each provider
+See in the website directory
 
 Developing the Provider
 ---------------------------
