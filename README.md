@@ -1,10 +1,15 @@
 # Transloadit Terraform Provider
 
-- Website: https://www.terraform.io
-- [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
-- Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
+- Transloadit Docs: <https://transloadit.com/docs/>
+- Transloadit Twitter: <https://twitter.com/transloadit>
+- Transloadit Community: <https://community.transloadit.com/>
+- Terraform Website: https://www.terraform.io
+- Terraform Gitter: [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
+- Terraform Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
 <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
+
+<img src="https://transloadit.edgly.net/assets/images/artwork/logos-transloadit-default.svg" width="600px">
 
 ## Requirements
 
