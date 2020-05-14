@@ -10,28 +10,33 @@
 
 -	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
 
-## Installing the provider
+## Install the Provider
 
-The recommended way to install *terraform-provider-transloadit* is to use the binary
-distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The packages are available for Linux, macOS (darwin) and Windows (all on amd64 architecture).
+The recommended way to install the Transloadit Terraform Provider is to use binary distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The binaries are available for Linux, macOS (darwin) and Windows (all for the amd64 architecture).
 
-Download and uncompress the latest release for your OS. This example uses the Linux binary.
+Here's how to download and uncompress the latest release for your OS:
+
+### Install the Provider on Linux
 
 ```bash
-mkdir -p ~/.terraform.d/plugins/
-cd ~/.terraform.d/plugins/
+mkdir -p ~/.terraform.d/plugins/ && cd !$
 curl -sSL https://github.com/transloadit/terraform-provider-transloadit/releases/download/v0.1.0/terraform-provider-transloadit_linux_amd64.tar.gz |tar xvz
+cd -
 ```
 
-After saving and exctracting the provider to your plugins directory, you'll want to initialize Terraform in your project so it can find the plugin.
+### Install the Provider on macOS
 
 ```bash
-terraform init
+mkdir -p ~/.terraform.d/plugins/ && cd !$
+curl -sSL https://github.com/transloadit/terraform-provider-transloadit/releases/download/v0.1.0/terraform-provider-transloadit_darwin_amd64.tar.gz |tar xvz
+cd -
 ```
 
-On windows, you have to store the provider in `%APPDATA%\terraform.d\plugins` 
+### Install the Provider on Windows
 
-## Using the provider
+[Download](https://github.com/transloadit/terraform-provider-transloadit/releases) and unpack the provider into `%APPDATA%\terraform.d\plugins`.
+
+## Usage
 
 Here's a quick example. More detailed instructions can be found in the [website directory](./website/).
 
@@ -79,9 +84,10 @@ output "my-terraform-template-id" {
 }
 ```
 
-Now on the cli, run:
+Now on the CLI, run:
 
 ```bash
+terraform init # only required on the first run after using a new Provider (version)
 terraform plan
 ```
 
