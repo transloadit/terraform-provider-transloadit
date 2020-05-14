@@ -75,8 +75,8 @@ resource "transloadit_template" "my-terraform-template" {
 EOT
 }
 
-output "cdn-resize-id" {
-  value = transloadit_template.resize-img.id
+output "my-terraform-template-id" {
+  value = transloadit_template.my-terraform-template.id
 }
 ```
 
