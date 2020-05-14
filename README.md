@@ -119,11 +119,13 @@ make test
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
 
-*Note:* Acceptance tests create real resources, and often cost money to run.
+You'll need to copy `env.example.sh` to `env.sh` and add real Transloadit Credentials. You can then source that and run:
 
 ```bash
 make testacc
 ```
+
+*Note:* Acceptance tests create real resources, and often cost money to run.
 
 ### Releasing
 
