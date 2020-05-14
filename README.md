@@ -1,19 +1,28 @@
 # Transloadit Terraform Provider
 
-- Transloadit Docs: <https://transloadit.com/docs/>
-- Transloadit Twitter: <https://twitter.com/transloadit>
-- Transloadit Community: <https://community.transloadit.com/>
+<img align="right" src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" height="82px">
+
 - Terraform Website: https://www.terraform.io
 - Terraform Gitter: [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Terraform Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
-<img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
+<img align="right" src="https://transloadit.edgly.net/assets/images/artwork/logos-transloadit-default.svg" height="130px">
 
-<img src="https://transloadit.edgly.net/assets/images/artwork/logos-transloadit-default.svg" width="600px">
+- Transloadit Docs: <https://transloadit.com/docs/>
+- Transloadit Twitter: <https://twitter.com/transloadit>
+- Transloadit Community: <https://community.transloadit.com/>
+
+## Intro
+
+Transloadit is a file processing service for companies. Developers describe desired outputs with a declarative JSON recipe to encode video, resize and recognize images, normalize audio, thumbnail documents, screenshot websites, and so much more.
+
+Terraform is a tool to provision infrastructure as code. Developers describe desired infrastructure (such as webservers, loadbalancers, storage buckets) with a declarative HCL to launch it.
+
+The Transloadit Terraform Provider lets you launch Transloadit recipes (Templates) with Terraform. This way you can ochrestrate your media processing pipelines declaratively from a single place, and make sure it works well in conjunction with other infrastructure. For instance, you may want to use Transloadit as the media conversion engine for your not-so Smart CDN, or make sure required storage  buckets are set up in a compatible way.
 
 ## Requirements
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
+- [Terraform](https://www.terraform.io/downloads.html) 0.12.x
 
 ## Install the Provider
 
@@ -55,8 +64,8 @@ provider "transloadit" {
 }
 
 resource "transloadit_template" "my-terraform-template" {
-	name     = "my-terraform-template"
-	template = <<EOT
+  name     = "my-terraform-template"
+  template = <<EOT
 {
   "steps": {
     ":original": {
