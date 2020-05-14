@@ -9,7 +9,6 @@
 ## Requirements
 
 -	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
--	[Go](https://golang.org/doc/install) 1.11 (only if you want to change/build the provider plugin yourself)
 
 ## Installing the provider
 
@@ -86,7 +85,9 @@ Now on the cli, run:
 terraform plan
 ```
 
-## Developing the Provider
+## Contributing
+
+### Developing the Provider
 
 If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.13+ is *required*). You'll also need to correctly setup a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
 
@@ -113,6 +114,6 @@ In order to run the full suite of Acceptance tests, run `make testacc`.
 make testacc
 ```
 
-## Releasing
+### Releasing
 
 Travis CI is set up to automatically build and release artifacts onto GitHub Releases upon pushing e.g. a "v0.2.0" tag to the master branch.
