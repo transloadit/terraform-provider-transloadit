@@ -9,56 +9,56 @@ script:
 branches:
   only:
   - master
-  - /^v\d+\.\d+\.\d+.*$/
+  - "/^v\\d+\\.\\d+\\.\\d+.*$/"
 matrix:
   fast_finish: true
   allow_failures:
   - go: tip
   include:
-    - stage: Test
-      go: 1.12.x
-      env: GOFLAGS=-mod=vendor GO111MODULE=on
-    - stage: 
-      go: 1.13.x
-      env: GOFLAGS=-mod=vendor
-    - stage: 
-      go: tip
-      env: GOFLAGS=-mod=vendor 
-    - stage: 
-      go: 1.13.x
-      env: GOFLAGS=-mod=vendor GOARCH=arm
-      script: 
-        - make build 
-    - stage: 
-      go: 1.13.x
-      env: GOFLAGS=-mod=vendor GOARCH=amd64
-      script: 
-        - make build 
-    - stage: 
-      go: 1.13.x
-      env: GOFLAGS=-mod=vendor GOOS=windows
-      script: 
-        - make build 
-    - stage: Deploy
-      go: 1.13.x
-      script: skip
-      before_deploy:
-        - GOFLAGS="-mod=vendor" VERSION=${TRAVIS_TAG} make release
-      deploy:
-        provider: releases
-        api_key: "${GH_TOKEN}"
-        skip_cleanup: true
-        file:
-          - build/terraform-provider-transloadit_darwin_amd64.tar.gz
-          - build/terraform-provider-transloadit_linux_amd64.tar.gz
-          - build/terraform-provider-transloadit_windows_amd64.tar.gz
-        on:
-          tags: true
-       
-  
-
+  - stage: Test
+    go: 1.12.x
+    env: GOFLAGS=-mod=vendor GO111MODULE=on
+  - stage: 
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor
+  - stage: 
+    go: tip
+    env: GOFLAGS=-mod=vendor
+  - stage: 
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=arm
+    script:
+    - make build
+  - stage: 
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=amd64
+    script:
+    - make build
+  - stage: 
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOOS=windows
+    script:
+    - make build
+  - stage: Deploy
+    go: 1.13.x
+    script: skip
+    before_deploy:
+    - GOFLAGS="-mod=vendor" VERSION=${TRAVIS_TAG} make release
+    deploy:
+      provider: releases
+      api_key: "${GH_TOKEN}"
+      skip_cleanup: true
+      file:
+      - build/terraform-provider-transloadit_darwin_amd64.tar.gz
+      - build/terraform-provider-transloadit_linux_amd64.tar.gz
+      - build/terraform-provider-transloadit_windows_amd64.tar.gz
+      on:
+        tags: true
 env:
   global:
   - secure: beVDMEk2KSHTTZ5FWaBuWbR+rc2Uz+QA7yGv813czPY6jaIwVYcpwp3e0aX1pDMRdSP9H0dtONQ7pi65raIyJ1CC/wllA/JED7ifiNfEzXiAC6kJjTGMcnb4/6Ugg+K5Bdif8TpgQNhJyzzwUvWxq+EG979P6YZZ+3QZOM24fsgu3ppk47FU3W07IZvbo8hAYCNpdPN8KPHr1UeslnzUSToRKp0hMMIshssGpD2pj8GiCo8IAsXuTvLne1nt9fALbLSe6L4TII5GGA01WXRdqYNj8mnX8PU+Thd0ILGhhmCefHVp0RYRNklS1Pf8xTUESKR6ny4PcebkOMtCXD8a7RT/Okl9r7+NSwGZrphQ+nCF8h7W6SIj/QpSIiZ9ngKKKkYXy1BGniP2PsqC4VvhTHCcAfeD35DPQCIC3wZXGTOsqcoxgFUcnRVFAusyTKINLlxlvj2gINj2SSJlcKTxGFhnlnwqvFMQfx80bR0NhF7zb6Ii0onGh/5tCfw3MzWIY14WHTSt8D4eG/we6D8I7I3bW4X/JyIqTgzcqcr9+82b6pNVMIuw9i4Z/6vVl2I0BC9z8wYsjhB9N11rLesT+WvDBP1+SiSaXXbkj7j8lHm09sgduQvvx4yYqa03ZTyaMxnT3tKmv2iz2NvNy7ITlTnwEHR/8gCrmScPtRkcNrg=
   - secure: OxUKXPk5KOoGWcJ0LswIu5X/mnm+vA/3PHuvRMiTfC3DjvB1sIRrR/NMHYbWKId917zhFxZOxAwXxUjqWhbzdUI2XF3NsUJBLHhl1itFYzbP6F3gkywTjo9m8qXarQWnYhfSu3A+Nej6EOoRKYMwGkfgp1DNm8iptPzYSTQdgw5SPOQerHrg1aIr2y5Gk1VzR0GAmFW7EhEcVULT/4H4ETjaiJhKkX0947GxmboeyKOiVbCKrVXxBjKiW91WkKfWwhKSqpzIy2tk/2/wrHj9/XQjirOYOA0/KIMm9UohbHv9ATXtYdXKHP0cvtXifSP2184niOiOhPwLZBdm6UsPI4IZT6D6PWhULJsZCrwoAmeBSiFRZbyG8fGHdImPIpgNVzH7HXM365ueU45WrBFitr6CmLdT87gk7KG6TllNWA0ZGL7y3kQnI3e2XF0eDbCU2F7fesf/LE0/4vUgDarF9HjAVLD0cX92qUyDPFaMWHNLkLyqF29JL/fPuWo13JF7G2jHsapSZ6m9IzCfxK1O5oud08iHc4WiVVLtt53wCFInTKyOJdd94IZJxLTadgL2x/ggrNLqXWYJmuPf4EGSeq5Tktvyh17gTTWJn2JMU4txMX7MNCHZYBhes9Hc/fbv/OgSuAVkWy3V8U9VCpX49CPu+2jDcYJMO06tpom++Ps=
   - secure: VrqePjoOnstLHkR60YOye8TRnF1WfhBTS2dhxmwrn9SOZFNcGd4gk0rXscwPhVCs74StEFZj6Kax/7J3XpTpKMtTemW386VhljIK8C6cRttZ0M+JAf8KuMPkUM2J00zF46l9bHKXCj15ND48Ki+u3Yg2lsV7PBVaLDclj1mw30fuMSk8QNGAlyYJE51SqljYWd6S+W9ap4n2dY5Y//8s3XLYwCJvbYzpfvUAoREs+fWGBxs+/DopJeSb36Pa3AoITmWfzIYynxQIVZgwKaMysw7ed3YKwLnRRoR9Atq3B0Hbq3Ognc8+Me0RXa4XM1icR4l3c4HDLKSSXhJwxgGMBEFtnD8AsphSXX+PiTIBqdNrLw7inWOsgeIcKivYHe0STnjT+lXiDg/rRFexqDsweYMTwrWhvoYdm5d4JbFj/3YKz1r51Qf6JKeSxxQzvgzK9v6ghnGuB9yxgZc9w4FxB23tTo76bDoKPqPqDlXuQI9B19JxrUiLcuA/NQyVfiKIUpi/vrV61KZZCCwdmdcUZfVAl0i9Oc/AA1192DUqwCn3Knoat6cyY7/xc6jiF8tXlQAddQvkKGuZk2OO5L3cGtx9gmbTYeyilXqzdARzPEUe6uaS/bBDfV8T+SLwRsnwR+wRhTn+hS4pmhm4umgBMaNpFC8GIl2qzgWH2BwGelc=
+  - secure: qJxRuogNIgYQKTY6bmsWLMKP8XsA1Amc1RLQCGW54MWuCDUkOcAlPAbqDIs0ZKzhHlHv6K3rDs39muFCiab+SeUutYYRfvyqpnD3DXHKOXuVmDgX/nyiQ20Y/2n9LgCuO5O/2LLrUoi/CrYUpbb+61PUh4lc3B3CZcS3MycG/bZNzIDsp/yZeBgp1miAa+n+iY9rHKduZbx7cV2jJPoPZXjbccbnkvwVssgMsOamZCG8s2ptiGOKiMoQdo42zMEwrIB0TNDWalSZtphKqkkORIWmJBFnznLCJA2KgageiSq67Dlc6p40OC/S5JcmP02mun9LAf01nuYxyj3aeLgtQhASdJASTYCEW2OmqOgH7gk74Vbv5PZ83xnYXr7AKQ8pyhWJRGIJcn9Ic0JGIjj85xuXtMr3T/yxYvM48j5h2NQGnPPqQ1JhrhNzYoaFdhvwTq+RztMJd/5atMswY+Wb0qpAScTPBKKPGWnNikbPyhYSXqLFXPc9+aZiRREA3R58pD4ZBrCBmPifYZwz8PKYSRc7gcOBUpHQg15dgahynG6ejffRKOisMV6o2KXISMlL3uU/FLUNxv+5/p2RQJEKrVOt8EfuVPssqzpKc70qzln8sRpRt0c/HAXQB7nr+db+wB+iW+BUmos09djzklf9sHrRkq9P8e+fe9NFkk5fpXM=
+  - secure: Ga46K211zoeeM+sLR3g4krvefhb4hQTcgAJ4BCW1wD9vbC3ZzDQdKVq8MaUK8CdGFW/yj5ez3KOdN9GOVYOooo4SvNfAeI5GoIvJEeqVuoPj6C6xDgPX/VrG1oTaax+0M9oM/RC9FdrgSoTHQH7Ki6jyGKkCFGVWh7Ew20iDVbDLoAKcDVJvkoc7azbxTV3FljZOVFWke6WG8+GdoHStqT4AueJtEnqTGZi/Us2WSpiJyTJXdylYomUX/hWqRCkzsUAT0JrYTuGj4lhKS3s4zNZShnJEa5DwJGBA5YBC3tQuH3Inioyd5qkEgIer0/ht2LeUrQj6nQ82oowCTGy7sxOhAq3unbh4K1FfebCJfaSoCb12F+fB2OB1DWVzG/aKpFcSJBCa94S5gich9GpmJ1t2yeUTC4ZdUSBdhPcbnr2o2AgclFPqMq9xohdotoYlQIqGdtfqwHB64efO7pPTWiskbHIETCP73yUttkc4lAbsUjDtY57nJhu6u+l9zlOky6fujxJNxyaFuVL8UpoPDVV9f/4loGJUrr4Yeal5IylZF5XSZXllkxJAgaUC0rjXvZX4WiY/8uy/bQHo5blyXXlS8YKUNvGpnnLktaLGkRSEGssXyP/eAOMzqN0qRnXs2lq1xh/UlkQMqN1w4fAtWQSD/m3+NPik0scw6FGXdZ4=
+  - secure: LRLPbItI1YClngrgVzcZ0Y+jjiuinPUSseyfF5TWxIzAAuW8jZpXeurn00iXuTBNdGX5qurIu/9GkHCAv1oV9ZHlUjku3epEOSr6mudqTWBtjZiuY1OFmizSC8xrInJ8Oca/0QwDZS+6jSmCwlkv3IeQ/fYkpBCn1cAAomTMH7fSUNnxeYNTsCfJeK7xzcsRDn3vv+yFSztXzdK+fypR0laC1mmhTyGC6PORKyYuYtjVFLZRpBRL4ZaMGvtu6ooYesei18wxLyRcFq4Yxt2PbzCZYUg5VCNhvvZnfJiouDhBsxde2EcHMcTBjgRjPMro5TPOfUQxk4nHeCCWnX16pD5+Mg13oCT2LoPG/QMv2qrmJ0oluNOiRnnSTFHcEpFzNFCBWdW5p4H6PJAEO76geQw5wOKn09Cmly1Ji5hagoZ0PL2gkg7T71k6Fug/ZhQombk+1B6dNIDsInLahqo/h4QHIUTtXb/IN3s3zf4rc6QYMSpZLBFhWWzlJ3KZAVj0MJQRpOOYoHDv0449KLmtWspRCOUSuFnz4blxO5r17HnPR1WCh3TePNOPn2YaykHuItJB2/zTKs1baJ8n72YL+BzuwHXGzrtaelNMoPh11wNj8YphFzt5wAwnj5wgSozWFaGVcmx/9tOgY+JMfnd2EMZ1hOKgzM9H06XyBdIe1Pg=
