@@ -1,19 +1,20 @@
 # Transloadit Terraform Provider
 
-- Transloadit Docs: <https://transloadit.com/docs/>
-- Transloadit Twitter: <https://twitter.com/transloadit>
-- Transloadit Community: <https://community.transloadit.com/>
 - Terraform Website: https://www.terraform.io
 - Terraform Gitter: [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Terraform Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
 <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
 
-<img src="https://transloadit.edgly.net/assets/images/artwork/logos-transloadit-default.svg" width="600px">
+- Transloadit Docs: <https://transloadit.com/docs/>
+- Transloadit Twitter: <https://twitter.com/transloadit>
+- Transloadit Community: <https://community.transloadit.com/>
+
+<img src="https://transloadit.edgly.net/assets/images/artwork/logos-transloadit-default.svg" width="500px">
 
 ## Requirements
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
+- [Terraform](https://www.terraform.io/downloads.html) 0.12.x
 
 ## Install the Provider
 
