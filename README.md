@@ -116,4 +116,4 @@ make testacc
 
 ### Releasing
 
-Travis CI is set up to automatically build and release artifacts onto GitHub Releases upon pushing e.g. a "v0.2.0" tag to the master branch.
+Travis CI is set up to automatically build and release artifacts onto GitHub Releases upon pushing e.g. a `v0.2.0` tag to the master branch.
