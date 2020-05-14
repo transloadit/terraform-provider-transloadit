@@ -36,6 +36,8 @@ On windows, you have to store the provider in `%APPDATA%\terraform.d\plugins`
 
 Here's a quick example. More detailed instructions can be found in the [website directory](./website/).
 
+In `main.tf`:
+
 ```hcl
 provider "transloadit" {
   auth_key    = "<TRANSLOADIT-AUTH-KEY>"
@@ -60,7 +62,7 @@ resource "transloadit_template" "my-terraform-template" {
     "thumbed": {
       "use": ":original",
       "robot": "/video/thumbs",
-      "count": 3,
+      "count": 4,
       "ffmpeg_stack": "v3.3.3"
     },
     "exported": {
@@ -72,6 +74,16 @@ resource "transloadit_template" "my-terraform-template" {
 }
 EOT
 }
+
+output "cdn-resize-id" {
+  value = transloadit_template.resize-img.id
+}
+```
+
+Now on the cli, run:
+
+```bash
+terraform plan
 ```
 
 ## Developing the Provider
@@ -80,23 +92,23 @@ If you wish to work on the provider, you'll first need [Go](http://www.golang.or
 
 To compile the provider, run `make build`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
-```sh
-$ make build
-...
-$ $GOPATH/bin/terraform-provider-transloadit
-...
+```bash
+make build
+# ...
+$GOPATH/bin/terraform-provider-transloadit
+# ...
 ```
 
 In order to test the provider, you can simply run `make test`.
 
-```sh
-$ make test
+```bash
+make test
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
 
 *Note:* Acceptance tests create real resources, and often cost money to run.
 
-```sh
-$ make testacc
+```bash
+make testacc
 ```

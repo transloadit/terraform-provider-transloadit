@@ -34,7 +34,7 @@ resource "transloadit_template" "my-terraform-template" {
     "thumbed": {
       "use": ":original",
       "robot": "/video/thumbs",
-      "count": 3,
+      "count": 4,
       "ffmpeg_stack": "v3.3.3"
     },
     "exported": {

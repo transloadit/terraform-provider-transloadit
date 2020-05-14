@@ -69,9 +69,9 @@ provider "transloadit" {}
 Usage:
 
 ```bash
-$ export TRANSLOADIT_AUTH_KEY="my-access-key"
-$ export TRANSLOADIT_AUTH_SECRET="my-secret-key"
-$ terraform plan
+export TRANSLOADIT_AUTH_KEY="my-access-key"
+export TRANSLOADIT_AUTH_SECRET="my-secret-key"
+terraform plan
 ```
 
 ## Arguments Reference
