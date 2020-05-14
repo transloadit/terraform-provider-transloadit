@@ -5,7 +5,7 @@ description: |-
   Manages Transloadit template
 ---
 
-# transloadit_template
+# Resource: transloadit_template
 
 Manages Transloadit Templates. 
 For additional details please refer to the [Transloadit documentation](https://transloadit.com/docs/)
@@ -48,7 +48,7 @@ EOT
 }
 ```
 
-!> If you use [Assembly Variables](https://transloadit.com/docs/#assembly-variables) such as `${fields.width}`, make sure to [escape them](https://www.terraform.io/docs/configuration-0-11/interpolation.html) via double dollar signs: `$${fields.width}`.
+~> If you use [Assembly Variables](https://transloadit.com/docs/#assembly-variables) such as `${fields.width}`, make sure to [escape them](https://www.terraform.io/docs/configuration-0-11/interpolation.html) via double dollar signs: `$${fields.width}`.
 
 ## Argument Reference
 
@@ -56,6 +56,12 @@ The following arguments are supported:
 
 - `name` - (Required) name of the Template to be added
 - `template` - (Required) JSON string of the Template's Assembly Instructions. The top-level object must be the JSON object with a `"steps"` key. For more details, see [Assembly Instructions](https://transloadit.com/docs/#assembly-instructions)
+
+## Attributes Reference 
+
+- `id` - The Template ID reference from Transloadit, e.g. `908ab54f2c4b479184db637709320c85`
+- `name` - The Template Slug reference from Transloadit, e.g. `my-terraform-template`
+- `template` - The Template's Assembly Instructions as a JSON string, e.g. `{ "steps": { ... } }`
 
 ## Import
 
