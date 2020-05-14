@@ -45,7 +45,7 @@ func configureProvider(d *schema.ResourceData) (interface{}, error) {
 	options.AuthKey = d.Get("auth_key").(string)
 	options.AuthSecret = d.Get("auth_secret").(string)
 	if options.AuthKey == "" || options.AuthSecret == "" {
-		fmt.Errorf("Missing TransloadIt AuthKey ot AuthSecret")
+		return nil, fmt.Errorf("Missing TransloadIt AuthKey ot AuthSecret")
 	}
 	client := transloadit.NewClient(options)
 	return &client, nil
