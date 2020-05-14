@@ -12,6 +12,14 @@
 - Transloadit Twitter: <https://twitter.com/transloadit>
 - Transloadit Community: <https://community.transloadit.com/>
 
+## Intro
+
+Transloadit is a file processing service for companies. Developers describe desired outputs with a declarative JSON recipe to encode video, resize and recognize images, normalize audio, thumbnail documents, screenshot websites, and so much more.
+
+Terraform is a tool to provision infrastructure as code. Developers describe desired infrastructure (such as webservers, loadbalancers, storage buckets) with a declarative HCL to launch it.
+
+The Transloadit Terraform Provider lets you launch Transloadit recipes (Templates) with Terraform. This way you can ochrestrate your media processing pipelines declaratively from a single place, and make sure it works well in conjunction with other infrastructure. For instance, you may want to use Transloadit as the media conversion engine for your not-so Smart CDN, or make sure required storage  buckets are set up in a compatible way.
+
 ## Requirements
 
 - [Terraform](https://www.terraform.io/downloads.html) 0.12.x
