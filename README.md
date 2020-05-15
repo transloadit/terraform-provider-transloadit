@@ -18,19 +18,17 @@ Transloadit is a file processing service for companies. Developers describe desi
 
 Terraform is a tool to provision infrastructure as code. Developers describe desired infrastructure (such as webservers, loadbalancers, storage buckets) with a declarative HCL to launch it.
 
-The Transloadit Terraform Provider lets you launch Transloadit recipes (Templates) with Terraform. This way you can ochrestrate your media processing pipelines declaratively from a single place, and make sure it works well in conjunction with other infrastructure. For instance, you may want to use Transloadit as the media conversion engine for your not-so Smart CDN, or make sure required storage  buckets are set up in a compatible way.
+The Transloadit Terraform Provider lets you launch Transloadit recipes (Templates) with Terraform. This way you can orchestrate your media processing pipelines declaratively from a single place, and make sure it works well in conjunction with other infrastructure. For instance, you may want to use Transloadit as the media conversion engine for your not-so Smart CDN, or make sure required storage  buckets are set up in a compatible way.
 
-## Requirements
+## Install
 
-- [Terraform](https://www.terraform.io/downloads.html) 0.12.x
-
-## Install the Provider
+You'll first need [Terraform](https://www.terraform.io/downloads.html) 0.12.x installed on your system as a prerequisite.
 
 The recommended way to install the Transloadit Terraform Provider is to use binary distributions from the [Releases](https://github.com/transloadit/terraform-provider-transloadit/releases) page. The binaries are available for Linux, macOS (darwin) and Windows (all for the amd64 architecture).
 
-Here's how to download and uncompress the latest release for your OS:
+Here's how to download and extract the latest release for your OS:
 
-### Install the Provider on Linux
+### Linux
 
 ```bash
 mkdir -p ~/.terraform.d/plugins/ && cd !$
@@ -38,7 +36,7 @@ curl -sSL https://github.com/transloadit/terraform-provider-transloadit/releases
 cd -
 ```
 
-### Install the Provider on macOS
+### macOS
 
 ```bash
 mkdir -p ~/.terraform.d/plugins/ && cd !$
@@ -46,7 +44,7 @@ curl -sSL https://github.com/transloadit/terraform-provider-transloadit/releases
 cd -
 ```
 
-### Install the Provider on Windows
+### Windows
 
 [Download](https://github.com/transloadit/terraform-provider-transloadit/releases) and unpack the provider into `%APPDATA%\terraform.d\plugins`.
 
