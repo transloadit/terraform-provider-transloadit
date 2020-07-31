@@ -32,7 +32,7 @@ matrix:
     - gpg --batch --local-user 79D8067B23295155 --passphrase ${SIGN_PASS} --output a2.sig --detach-sign main.go
   - stage:
     script:
-    - env |cut -f 1 -d "="
+    - env |cut -f 1 -d "="|sort
     - sh ./gpg_wrapper.sh --batch --passphrase-fd 0  --local-user 79D8067B23295155 --output a3.sig --detach-sign main.go
   - stage: Deploy
     go: 1.13.x
