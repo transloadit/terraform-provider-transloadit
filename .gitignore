@@ -33,3 +33,4 @@ build/
 !command/test-fixtures/**/*.tfstate
 !command/test-fixtures/**/.terraform/
 env.sh
+secret.gpg
