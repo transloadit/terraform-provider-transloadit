@@ -33,16 +33,15 @@ checksum:
   algorithm: sha256
 signs:
   - artifacts: checksum
+    cmd: "./gpg_wrapper.sh"
     args:
-      - "--batch"
       - "--local-user"
       - "{{ .Env.GPG_FINGERPRINT }}"
-      - "--passphrase"
-      - "{{ .Env.SIGN_PASS}}"
       - "--output"
       - "${signature}"
       - "--detach-sign"
       - "${artifact}"
+
 release:
   # Visit your project's GitHub Releases page to publish this release.
   draft: true

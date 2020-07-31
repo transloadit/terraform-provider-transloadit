@@ -15,25 +15,30 @@ matrix:
   allow_failures:
   - go: tip
   include:
+  - stage: Test
+    go: 1.12.x
+    env: GOFLAGS=-mod=vendor GO111MODULE=on
   - stage:
-    script:
-    - GPG_TTY=$(tty) gpg --batch --yes --local-user 79D8067B23295155 --passphrase '${SIGN_PASS}' --output a11.sig --detach-sign main.go
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor
   - stage:
-    script:
-    - GPG_TTY=$(tty) gpg --batch --yes --no-tty --local-user 79D8067B23295155 --passphrase ${SIGN_PASS} --output a12.sig --detach-sign main.go
+    go: tip
+    env: GOFLAGS=-mod=vendor
   - stage:
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=arm
     script:
-    - GPG_TTY=$(tty) gpg --batch --local-user 79D8067B23295155 --passphrase "${SIGN_PASS}" --output a13.sig --detach-sign main.go
+      - make build
   - stage:
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOARCH=amd64
     script:
-    - gpg --batch --yes --no-tty --pinentry-mode loopback --local-user 79D8067B23295155 --passphrase '${SIGN_PASS}' --output a21.sig --detach-sign main.go
+      - make build
   - stage:
+    go: 1.13.x
+    env: GOFLAGS=-mod=vendor GOOS=windows
     script:
-    - gpg --batch --yes --local-user 79D8067B23295155 --passphrase ${SIGN_PASS} --output a22.sig --detach-sign main.go
-  - stage:
-    script:
-    - env |cut -f 1 -d "="|sort
-    - sh ./gpg_wrapper.sh --batch --yes --no-tty --pinentry-mode loopback --passphrase-fd 0  --local-user 79D8067B23295155 --output a23.sig --detach-sign main.go
+      - make build
   - stage: Deploy
     go: 1.13.x
     script: skip
