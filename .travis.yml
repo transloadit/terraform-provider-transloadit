@@ -57,3 +57,4 @@ before_install:
 - gpg --list-keys
 - gpg --version
 - chmod +x gpg_wrapper.sh
+- tty
