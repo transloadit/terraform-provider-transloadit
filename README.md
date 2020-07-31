@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/transloadit/terraform-provider-transloadit.svg?branch=master)](https://travis-ci.org/transloadit/terraform-provider-transloadit)
+
 # Transloadit Terraform Provider
 
 <img align="right" src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" height="82px">
