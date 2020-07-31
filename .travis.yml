@@ -42,6 +42,7 @@ matrix:
   - stage: Deploy
     go: 1.13.x
     script: skip
+    env: GITHUB_TOKEN="${GH_TOKEN}"
     deploy:
       provider: script
       skip_cleanup: true
