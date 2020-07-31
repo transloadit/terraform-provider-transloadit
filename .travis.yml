@@ -15,39 +15,10 @@ matrix:
   allow_failures:
   - go: tip
   include:
-  - stage: Test
-    go: 1.12.x
-    env: GOFLAGS=-mod=vendor GO111MODULE=on
-  - stage: 
-    go: 1.13.x
-    env: GOFLAGS=-mod=vendor
-  - stage: 
-    go: tip
-    env: GOFLAGS=-mod=vendor
-  - stage: 
-    go: 1.13.x
-    env: GOFLAGS=-mod=vendor GOARCH=arm
-    script:
-    - make build
-  - stage: 
-    go: 1.13.x
-    env: GOFLAGS=-mod=vendor GOARCH=amd64
-    script:
-    - make build
-  - stage: 
-    go: 1.13.x
-    env: GOFLAGS=-mod=vendor GOOS=windows
-    script:
-    - make build
   - stage:
     script:
-    - gpg --batch --local-user 79D8067B23295155 --passphrase ${SIGN_PASS} --output a1.sig --detach-sign main.go
-  - stage:
-    script:
-      - gpg --batch --yes --local-user 79D8067B23295155 --passphrase ${SIGN_PASS} --output a2.sig --detach-sign main.go
-  - stage:
-    script:
-      - gpg2 --batch --yes --passphrase ${SIGN_PASS} --local-user 79D8067B23295155  --output a3.sig --detach-sign main.go
+    - GPG_TTY=$(tty) gpg --version
+    - GPG_TTY=$(tty) gpg --batch --local-user 79D8067B23295155 --passphrase '${SIGN_PASS}' --output a2.sig --detach-sign main.go
   - stage: Deploy
     go: 1.13.x
     script: skip
