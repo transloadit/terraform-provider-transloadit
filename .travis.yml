@@ -61,6 +61,3 @@ before_install:
   -in secret.gpg.enc -out secret.gpg -d
 - gpg --import --batch  secret.gpg
 - gpg --list-keys
-- gpg --version
-- chmod +x gpg_wrapper.sh
-- tty
