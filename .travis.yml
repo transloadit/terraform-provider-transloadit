@@ -42,7 +42,7 @@ matrix:
   - stage: Deploy
     go: 1.13.x
     script: skip
-    env: GITHUB_TOKEN="${GH_TOKEN}"
+    env: GITHUB_TOKEN="${GH_TOKEN}" GPG_FINGERPRINT=79D8067B23295155
     deploy:
       provider: script
       skip_cleanup: true
@@ -59,3 +59,5 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_a559f7c88919_key -iv $encrypted_a559f7c88919_iv
   -in secret.gpg.enc -out secret.gpg -d
+- gpg --import --batch secret.gpg
+- gpg --list-keys
