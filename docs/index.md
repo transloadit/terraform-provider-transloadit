@@ -7,18 +7,15 @@ description: |-
 
 # Transloadit Provider
 
-The Transloadit provider is used to manage Transloadit resources.
+The Transloadit provider is used to manage Transloadit Templates, by which you can declaratively configure automated media encoding pipelines.
 The provider needs to be configured with the proper credentials before it can be used.
-
-Use the navigation to the left to read about the available resources.
 
 ## Examples
 
-Here is an example that will setup a web server with an additional volume, a public IP and a security group.
+Follow these steps to get started:
 
-You can test this config by creating a `test.tf` and run terraform commands from this directory:
-
-- Get your [Transloadit credentials](https://transloadit.com/c/<MYACCOUNT>/template-credentials)
+- After signing up, Get your [Transloadit credentials](https://transloadit.com/c/<MYACCOUNT>/template-credentials/)
+- Create a new directory, cd into it, create a file called `main.tf`
 - Initialize a Terraform working directory: `terraform init`
 - Generate and show the execution plan: `terraform plan`
 - Build the infrastructure: `terraform apply`
@@ -27,22 +24,45 @@ You can test this config by creating a `test.tf` and run terraform commands from
 provider "transloadit" {
   auth_key    = "<TRANSLOADIT-AUTH-KEY>"
   auth_secret = "<TRANSLOADIT-AUTH-SECRET>"
-  version     = "0.1.0"
+  version     = "0.2.0"
+}
+
+resource "transloadit_template" "to-ipad-with-thumbnails" {
+  name     = "to-ipad-with-thumbnails"
+  template = <<EOT
+{
+  "steps": {
+    ":original": {
+      "robot": "/upload/handle"
+    },
+    "encoded": {
+      "use": ":original",
+      "robot": "/video/encode",
+      "preset": "ipad-high"
+    },
+    "thumbed": {
+      "use": ":original",
+      "robot": "/video/thumbs",
+      "count": 8
+    }
+  }
+}
+EOT
 }
 ```
 
 ## Authentication
 
-The Transloadit authentication is based on an **access key** and a **secret key**.
+Transloadit authentication is based on an **access key** and a **secret key**.
 
-The Transloadit provider offers two ways of providing these credentials. The following methods are supported, in this priority order:
+The Transloadit provider offers two ways of providing these credentials. The following methods are checked, in this order:
 
 1. [Static credentials](#static-credentials)
 2. [Environment variables](#environment-variables)
 
 ### Static credentials
 
-!> **Warning**: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file, or the state file, ever be committed to a public version control system.
+!> **Warning** Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file, or the state file, ever be committed to a public version control system.
 
 Static credentials can be provided by adding `access_key` and `secret_key` attributes in-line in the Transloadit provider block:
 
@@ -52,7 +72,6 @@ Example:
 provider "transloadit" {
   access_key = "my-access-key"
   secret_key = "my-secret-key"
-  version    = "0.1.0"
 }
 ```
 
@@ -71,7 +90,7 @@ Usage:
 ```bash
 export TRANSLOADIT_AUTH_KEY="my-access-key"
 export TRANSLOADIT_AUTH_SECRET="my-secret-key"
-terraform plan
+terraform apply
 ```
 
 ## Arguments Reference
@@ -84,4 +103,4 @@ the `TRANSLOADIT_AUTH_KEY` [environment variable](#environment-variables)
 - `auth_secret` - (Optional) The Transloadit secret key. It must be provided, but it can also be sourced from
 the `TRANSLOADIT_AUTH_SECRET` [environment variable](#environment-variables)
 
-- `endpoint` - (Optional) The Transloadit API endpoint. For standard usages, this argument don't have to be used
+- `endpoint` - (Optional) The Transloadit API endpoint. This defaults to `https://api2.transloadit.com` and automatically georoutes you to the fastest API location. You shouldn't have to change this unless you only deal with a single availability region or are a plugin contributor targeting local installs.
