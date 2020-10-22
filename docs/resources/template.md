@@ -56,6 +56,7 @@ The following arguments are supported:
 
 - `name` - (Required) name of the Template to be added
 - `template` - (Required) JSON string of the Template's Assembly Instructions. The top-level object must be the JSON object with a `"steps"` key. For more details, see [Assembly Instructions](https://transloadit.com/docs/#assembly-instructions)
+- `require_signature_auth` - (Optional- boolean . Default : false) Use true to deny requests that do not include a signature. With Signature Authentication you can ensure no one else is sending requests on your behalf.
 
 ## Attributes Reference 
 

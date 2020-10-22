@@ -9,17 +9,25 @@ import (
 
 func TestAccTemplate_basic(t *testing.T) {
 
-	resource_name := fmt.Sprintf("templatebasic%d", rand.Int()%1000)
+	randInt := rand.Int()%1000
+	template1_name := fmt.Sprintf("templatebasic%d", randInt)
+	template2_name := fmt.Sprintf("templatebasic%d", randInt+1)
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
 		CheckDestroy: nil,
 		Steps: []resource.TestStep{
 			{
-				Config: fmt.Sprintf(testAccTemplate_basic_1, resource_name),
+				Config: fmt.Sprintf(testAccTemplate_basic_1, template1_name, template2_name),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckExistingResource("transloadit_template.test"),
-					resource.TestCheckResourceAttr("transloadit_template.test", "name", resource_name),
+					testAccCheckExistingResource("transloadit_template.require_auth"),
+					resource.TestCheckResourceAttr("transloadit_template.test", "name", template1_name),
+					resource.TestCheckResourceAttr("transloadit_template.test", "require_signature_auth", "false"),
+					resource.TestCheckResourceAttr("transloadit_template.test", "steps.#","4"),
+					resource.TestCheckResourceAttr("transloadit_template.require_auth", "name", template2_name),
+					resource.TestCheckResourceAttr("transloadit_template.require_auth", "require_signature_auth", "true"),
+					resource.TestCheckResourceAttr("transloadit_template.require_auth", "steps.#","1"),
 				),
 			},
 		},
@@ -55,6 +63,20 @@ resource "transloadit_template" "test" {
       "use": ":original",
       "ffmpeg_stack": "v3.3.3"
     }
+  }
+}
+EOT
+}
+
+resource "transloadit_template" "require_auth" {
+	name = "%s"
+	template = <<EOT
+	require_signature_auth = true
+    {
+  "steps": {
+    ":original": {
+      "robot": "/upload/handle"
+    },
   }
 }
 EOT
