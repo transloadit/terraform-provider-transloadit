@@ -297,6 +297,8 @@ gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8
 gopkg.in/cheggaaa/pb.v1 v1.0.27/go.mod h1:V/YB90LKu/1FcN3WVnfiiE5oMCibMjukxqG/qStrOgw=
 gopkg.in/transloadit/go-sdk.v1 v1.1.1 h1:8VU2p+9uHb7mFWvozsmLwubO8dj85x7AlruV70C5Y/M=
 gopkg.in/transloadit/go-sdk.v1 v1.1.1/go.mod h1:0r/j+IlqMRif2ZcWiicnvrPu5UwhL7EXQ/UUB9WMU0c=
+gopkg.in/transloadit/go-sdk.v1 v1.2.0 h1:wWHRODbLA2OFijm94DVwUH5n5k+kgDWIa+01icHDf2c=
+gopkg.in/transloadit/go-sdk.v1 v1.2.0/go.mod h1:0r/j+IlqMRif2ZcWiicnvrPu5UwhL7EXQ/UUB9WMU0c=
 honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 honnef.co/go/tools v0.0.0-20190106161140-3f1c8253044a/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 honnef.co/go/tools v0.0.0-20190418001031-e561f6794a2a/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=

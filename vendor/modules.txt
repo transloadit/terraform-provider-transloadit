@@ -348,5 +348,5 @@ google.golang.org/grpc/stats
 google.golang.org/grpc/status
 google.golang.org/grpc/tap
 google.golang.org/grpc/test/bufconn
-# gopkg.in/transloadit/go-sdk.v1 v1.1.1
+# gopkg.in/transloadit/go-sdk.v1 v1.2.0
 gopkg.in/transloadit/go-sdk.v1
