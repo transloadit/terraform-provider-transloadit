@@ -26,7 +26,7 @@ func resourceTemplate() *schema.Resource {
 				Description: "name",
 			},
 			"require_signature_auth": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeBool,
 				Optional:    true,
 				ForceNew:    false,
 				Description: "Use true to deny requests that do not include a signature",

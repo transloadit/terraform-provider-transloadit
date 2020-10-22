@@ -24,10 +24,8 @@ func TestAccTemplate_basic(t *testing.T) {
 					testAccCheckExistingResource("transloadit_template.require_auth"),
 					resource.TestCheckResourceAttr("transloadit_template.test", "name", template1_name),
 					resource.TestCheckResourceAttr("transloadit_template.test", "require_signature_auth", "false"),
-					resource.TestCheckResourceAttr("transloadit_template.test", "steps.#","4"),
 					resource.TestCheckResourceAttr("transloadit_template.require_auth", "name", template2_name),
 					resource.TestCheckResourceAttr("transloadit_template.require_auth", "require_signature_auth", "true"),
-					resource.TestCheckResourceAttr("transloadit_template.require_auth", "steps.#","1"),
 				),
 			},
 		},
@@ -70,13 +68,13 @@ EOT
 
 resource "transloadit_template" "require_auth" {
 	name = "%s"
-	template = <<EOT
 	require_signature_auth = true
+	template = <<EOT
     {
   "steps": {
     ":original": {
       "robot": "/upload/handle"
-    },
+    }
   }
 }
 EOT
