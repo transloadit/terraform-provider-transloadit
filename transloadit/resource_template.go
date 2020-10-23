@@ -25,6 +25,13 @@ func resourceTemplate() *schema.Resource {
 				ForceNew:    false,
 				Description: "name",
 			},
+			"require_signature_auth": &schema.Schema{
+				Type:        schema.TypeBool,
+				Optional:    true,
+				ForceNew:    false,
+				Description: "Use true to deny requests that do not include a signature",
+				Default:     false,
+			},
 			"template": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
@@ -46,8 +53,9 @@ func resourceTemplateCreate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	payload := transloadit.Template{
-		Name:    d.Get("name").(string),
-		Content: *templateContent,
+		Name:                 d.Get("name").(string),
+		Content:              *templateContent,
+		RequireSignatureAuth: d.Get("require_signature_auth").(bool),
 	}
 	templateId, err := client.CreateTemplate(context.Background(), payload)
 	if err != nil {
@@ -75,6 +83,7 @@ func resourceTemplateRead(d *schema.ResourceData, meta interface{}) error {
 		return fmt.Errorf("Content field can't be marshalled to json +%v", template.Content)
 	}
 	d.Set("template", string(result))
+	d.Set("require_signature_auth", template.RequireSignatureAuth)
 	return nil
 }
 
@@ -85,8 +94,9 @@ func resourceTemplateUpdate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	payload := transloadit.Template{
-		Name:    d.Get("name").(string),
-		Content: *templateContent,
+		Name:                 d.Get("name").(string),
+		Content:              *templateContent,
+		RequireSignatureAuth: d.Get("require_signature_auth").(bool),
 	}
 	err = client.UpdateTemplate(context.Background(), d.Id(), payload)
 	return err
