@@ -9,7 +9,7 @@ import (
 
 func TestAccTemplate_basic(t *testing.T) {
 
-	randInt := rand.Int()%1000
+	randInt := rand.Int() % 1000
 	template1_name := fmt.Sprintf("templatebasic%d", randInt)
 	template2_name := fmt.Sprintf("templatebasic%d", randInt+1)
 	resource.Test(t, resource.TestCase{

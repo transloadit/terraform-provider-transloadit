@@ -53,8 +53,8 @@ func resourceTemplateCreate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	payload := transloadit.Template{
-		Name:    d.Get("name").(string),
-		Content: *templateContent,
+		Name:                 d.Get("name").(string),
+		Content:              *templateContent,
 		RequireSignatureAuth: d.Get("require_signature_auth").(bool),
 	}
 	templateId, err := client.CreateTemplate(context.Background(), payload)
@@ -94,8 +94,8 @@ func resourceTemplateUpdate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	payload := transloadit.Template{
-		Name:    d.Get("name").(string),
-		Content: *templateContent,
+		Name:                 d.Get("name").(string),
+		Content:              *templateContent,
 		RequireSignatureAuth: d.Get("require_signature_auth").(bool),
 	}
 	err = client.UpdateTemplate(context.Background(), d.Id(), payload)
