@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	transloadit "gopkg.in/transloadit/go-sdk.v1"
+	transloadit "github.com/transloadit/go-sdk"
 )
 
 func resourceTemplate() *schema.Resource {

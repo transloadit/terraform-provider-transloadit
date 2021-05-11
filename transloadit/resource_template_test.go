@@ -2,9 +2,10 @@ package transloadit
 
 import (
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"math/rand"
 	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
 func TestAccTemplate_basic(t *testing.T) {
