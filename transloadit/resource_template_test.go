@@ -35,8 +35,8 @@ func TestAccTemplate_basic(t *testing.T) {
 
 const testAccTemplate_basic_1 = `
 resource "transloadit_template" "test" {
-	name = "%s"
-	template = <<EOT
+  name = "%s"
+  template = <<EOT
     {
   "steps": {
     ":original": {
@@ -62,15 +62,16 @@ resource "transloadit_template" "test" {
       "use": ":original",
       "ffmpeg_stack": "v3.3.3"
     }
-  }
+  },
+  "notify_url": "https://example.com/"
 }
 EOT
 }
 
 resource "transloadit_template" "require_auth" {
-	name = "%s"
-	require_signature_auth = true
-	template = <<EOT
+  name = "%s"
+  require_signature_auth = true
+  template = <<EOT
     {
   "steps": {
     ":original": {
