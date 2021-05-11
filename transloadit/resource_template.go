@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	transloadit "gopkg.in/transloadit/go-sdk.v1"
+	transloadit "github.com/transloadit/go-sdk"
 )
 
 func resourceTemplate() *schema.Resource {
@@ -103,22 +104,11 @@ func resourceTemplateUpdate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func jsonStringToTemplate(src string) (*transloadit.TemplateContent, error) {
-	var v interface{}
-	err := json.Unmarshal([]byte(src), &v)
+	var content transloadit.TemplateContent
+	err := json.Unmarshal([]byte(src), &content)
 	if err != nil {
 		return nil, err
 	}
-	content, ok := v.(map[string]interface{})
-	if !ok {
-		return nil, fmt.Errorf("Content must be an JSON Object (Map)")
-	}
-	if value, ok := content["steps"]; ok {
-		steps, ok := value.(map[string]interface{})
-		if !ok {
-			return nil, fmt.Errorf("Steps value must be an Json Object")
-		}
-		return &transloadit.TemplateContent{Steps: steps}, nil
-	} else {
-		return nil, fmt.Errorf("Template must have a top-level key 'steps'")
-	}
+
+	return &content, nil
 }

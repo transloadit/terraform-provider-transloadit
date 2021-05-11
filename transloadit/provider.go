@@ -2,9 +2,10 @@ package transloadit
 
 import (
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
-	"gopkg.in/transloadit/go-sdk.v1"
+	transloadit "github.com/transloadit/go-sdk"
 )
 
 const prefix = "transloadit_"
