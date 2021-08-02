@@ -24,25 +24,17 @@ provider "transloadit" {
   alias       = "preprocess"
 }
 
-
 module "urltransform" {
   source    = "./urltransform"
   providers = {
     transloadit = transloadit.urltransform
   }
 }
-
 module "preprocess" {
   source    = "./preprocess"
   providers = {
     transloadit = transloadit.preprocess
   }
 }
-
-// Steps:
-// - Create `./urltransform/main.tf`, with at least a `terraform.required_providers.transloadit` block
-// - Run `terraform init`
-// - Move your template resources to `./urltransform/main.tf`
-// - Run `terraform state mv 'transloadit_template.resize-img' 'module.urltransform.transloadit_template.resize-img'` (or any other Template)
 
 output "cdn-resize-id" { value = module.urltransform.resize-img-id }
