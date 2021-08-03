@@ -52,5 +52,5 @@ jobs:
       run: make build
       env: 
         GOOS: ${{ matrix.os }}
-        GOARCH: ${{ matric.arch }}
+        GOARCH: ${{ matrix.arch }}
         
