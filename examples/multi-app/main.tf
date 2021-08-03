@@ -71,4 +71,22 @@ resource "transloadit_template" "video-encode" {
 EOT
 }
 
+
+// Optionally, you can share Templates between apps by adding them
+// to the ./shared-templates/shared.tf Module, invoking the Module
+// for each App you want to include below, and running: `terraform init`
+module "shared-in-urltransform" {
+  source = "./shared-templates"
+  providers = {
+    transloadit = transloadit.urltransform
+  }
+}
+module "shared-in-preprocess" {
+  source = "./shared-templates"
+  providers = {
+    transloadit = transloadit.preprocess
+  }
+}
+
+
 output "cdn-resize-id" { value = transloadit_template.resize-img.id }
