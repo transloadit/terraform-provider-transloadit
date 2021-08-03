@@ -31,3 +31,26 @@ jobs:
 #  Disabled as they need credentials
 #    - name: Acceptance Tests 
 #      run: make testacc
+
+  build: 
+    env: 
+      GOFLAGS: "-mod=vendor"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows, linux, darwin]
+        arch: [amd64,arm]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+        
+    - name: Build on ${{ matrix.os}}_${{matrix.arch}}
+      run: make build
+      env: 
+        GOOS: ${{ matrix.os }}
+        GOARCH: ${{ matric.arch }}
+        
