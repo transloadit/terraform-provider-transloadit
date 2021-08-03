@@ -1,0 +1,30 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env: 
+      GOFLAGS: "-mod=vendor"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.13
+
+    - name: Make go vet
+      run: make vet
+
+    - name: Unit Tests
+      run: make test
+
+#  Disabled as they need credentials
+#    - name: Acceptance Tests 
+#      run: make testacc
