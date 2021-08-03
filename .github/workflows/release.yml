@@ -34,6 +34,13 @@ jobs:
           echo "name:        ${{ steps.import_gpg.outputs.name }}"
           echo "email:       ${{ steps.import_gpg.outputs.email }}"
       -
+        name: Try to sign a file
+        run: |
+          gpg --version
+          echo foo > bar.txt
+          gpg --batch --local-user ${{ steps.import_gpg.outputs.fingerprint }} --output "bar.sig" --detach "bar.asc"
+          ls -l bar*
+      -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
