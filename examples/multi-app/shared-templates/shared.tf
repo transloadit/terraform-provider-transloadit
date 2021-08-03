@@ -1,3 +1,5 @@
+// This subdirectory is optional and only needed if you
+// want to share a Template with multiple Apps.
 terraform {
   required_version = ">= 1.0.0"
   required_providers {
