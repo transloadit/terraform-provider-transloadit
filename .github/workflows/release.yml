@@ -26,7 +26,7 @@ jobs:
         uses: crazy-max/ghaction-import-gpg@v3
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-     -
+      -
         name: GPG user IDs
         run: |
           echo "fingerprint: ${{ steps.import_gpg.outputs.fingerprint }}"
