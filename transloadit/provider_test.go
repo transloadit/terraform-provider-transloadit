@@ -2,8 +2,10 @@ package transloadit
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -16,6 +18,7 @@ func init() {
 	testAccProviders = map[string]terraform.ResourceProvider{
 		"transloadit": Provider().(*schema.Provider),
 	}
+	rand.Seed(time.Now().UTC().UnixNano())
 }
 
 func testAccPreCheck(t *testing.T) {
