@@ -38,7 +38,7 @@ jobs:
         run: |
           gpg --version
           echo foo > bar.txt
-          echo ""|gpg --batch --local-user ${{ steps.import_gpg.outputs.fingerprint }} --no-tty --pinentry-mode loopback --passphrase-fd 0 --output "bar.sig" --detach bar.txt
+          gpg --batch --local-user ${{ steps.import_gpg.outputs.fingerprint }} --no-tty --pinentry-mode loopback --output "bar.sig" --detach bar.txt
           ls -l bar*
       -
         name: Run GoReleaser
