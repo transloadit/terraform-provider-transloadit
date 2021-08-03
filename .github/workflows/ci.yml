@@ -28,9 +28,12 @@ jobs:
     - name: Unit Tests
       run: make test
 
-#  Disabled as they need credentials
-#    - name: Acceptance Tests 
-#      run: make testacc
+
+    - name: Acceptance Tests 
+      run: make testacc
+      env:
+        TRANSLOADIT_AUTH_KEY: ${{ secrets.TRANSLOADIT_AUTH_KEY }}
+        TRANSLOADIT_AUTH_SECRET: ${{ secrets.TRANSLOADIT_AUTH_SECRET }}
 
   build: 
     env: 
