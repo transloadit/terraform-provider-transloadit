@@ -33,7 +33,7 @@ jobs:
       run: make testacc
       env:
         TRANSLOADIT_AUTH_KEY: ${{ secrets.TRANSLOADIT_AUTH_KEY }}
-        TRANSLOADIT_AUTH_SECRET: ${{ secrets.TRANSLOADIT_AUTH_SECRET }}
+        TRANSLOADIT_AUTH_SECRET: "test"
 
   build: 
     env: 
