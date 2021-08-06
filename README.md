@@ -52,7 +52,7 @@ cd -
 
 ## Usage
 
-Here's a quick example. More detailed instructions can be found in the [website directory](./website/).
+Here's a quick example. More detailed instructions can be found in the [website directory](./website/). If you intend to use multiple Apps withing Transloadit, check out the [examples](./examples/multi-app) how to structure that by passing one provider alias per App.
 
 In `main.tf`:
 
