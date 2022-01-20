@@ -48,15 +48,15 @@ EOT
 }
 ```
 
-~> If you use [Assembly Variables](https://transloadit.com/docs/#assembly-variables) such as `${fields.width}`, make sure to [escape them](https://www.terraform.io/docs/configuration-0-11/interpolation.html) via double dollar signs: `$${fields.width}`.
+~> If you use [Assembly Variables](https://transloadit.com/docs/topics/assembly-instructions/#assembly-variables) such as `${fields.width}`, make sure to [escape them](https://www.terraform.io/docs/configuration-0-11/interpolation.html) via double dollar signs: `$${fields.width}`.
 
 ## Argument Reference
 
 The following arguments are supported:
 
 - `name` - (Required) name of the Template to be added
-- `template` - (Required) JSON string of the Template's Assembly Instructions. The top-level object must be the JSON object with a `"steps"` key. For more details, see [Assembly Instructions](https://transloadit.com/docs/#assembly-instructions)
-- `require_signature_auth` - (Optional - boolean) Use true to deny requests that do not include a signature. With [Signature Authentication](https://transloadit.com/docs/#signature-authentication) you can ensure no one else is sending requests on your behalf. Default value: false
+- `template` - (Required) JSON string of the Template's Assembly Instructions. The top-level object must be the JSON object with a `"steps"` key. For more details, see [Assembly Instructions](https://transloadit.com/docs/topics/assembly-instructions/)
+- `require_signature_auth` - (Optional - boolean) Use true to deny requests that do not include a signature. With [Signature Authentication](https://transloadit.com/docs/topics/signature-authentication/) you can ensure no one else is sending requests on your behalf. Default value: false
 
 ## Attributes Reference 
 
