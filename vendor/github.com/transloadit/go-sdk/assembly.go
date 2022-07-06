@@ -7,6 +7,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -14,12 +15,16 @@ import (
 type Assembly struct {
 	// NotifiyURL specifies a URL to which a request will be sent once the
 	// assembly finishes.
-	// See https://transloadit.com/docs#notifications.
+	// See https://transloadit.com/docs#notifications
 	NotifyURL string
 	// TemplateID specifies a optional template from which the encoding
 	// instructions will be fetched.
 	// See https://transloadit.com/docs/topics/templates/
 	TemplateID string
+	// Fields specifies additional key-value pairs that can be accessed by
+	// Assembly Instructions to allow customizing steps on a per-assembly basis.
+	// See https://transloadit.com/docs/#assembly-variables
+	Fields map[string]interface{}
 
 	steps   map[string]map[string]interface{}
 	readers []*upload
@@ -82,7 +87,7 @@ type AssemblyInfo struct {
 	AssemblyURL            string                 `json:"assembly_url"`
 	AssemblySSLURL         string                 `json:"assembly_ssl_url"`
 	BytesReceived          int                    `json:"bytes_received"`
-	BytesExpected          int                    `json:"bytes_expected"`
+	BytesExpected          Integer                `json:"bytes_expected"`
 	StartDate              string                 `json:"start_date"`
 	IsInfinite             bool                   `json:"is_infinite"`
 	HasDupeJobs            bool                   `json:"has_dupe_jobs"`
@@ -135,10 +140,28 @@ type FileInfo struct {
 	Meta             map[string]interface{} `json:"meta"`
 }
 
+// Integer is a warpper around a normal int but has softer JSON parsing requirements.
+// It can be used in situations where a JSON value is not always a number. Then parsing
+// will not fail and a default value of 0 will be returned.
+// For more details see: https://github.com/transloadit/go-sdk/issues/26
+type Integer int
+
+func (i *Integer) UnmarshalJSON(text []byte) error {
+	// Try parsing as an integer and default to 0, if it fails.
+	n, err := strconv.Atoi(string(text))
+	if err != nil {
+		*i = 0
+	}
+
+	*i = Integer(n)
+	return nil
+}
+
 // NewAssembly will create a new Assembly struct which can be used to start
 // an assembly using Client.StartAssembly.
 func NewAssembly() Assembly {
 	return Assembly{
+		Fields:  make(map[string]interface{}),
 		steps:   make(map[string]map[string]interface{}),
 		readers: make([]*upload, 0),
 	}
@@ -218,6 +241,10 @@ func (assembly *Assembly) makeRequest(ctx context.Context, client *Client) (*htt
 
 	if len(assembly.steps) != 0 {
 		options["steps"] = assembly.steps
+	}
+
+	if len(assembly.Fields) != 0 {
+		options["fields"] = assembly.Fields
 	}
 
 	if assembly.TemplateID != "" {
