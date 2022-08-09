@@ -41,12 +41,12 @@ func resourceTemplateCredential() *schema.Resource {
 					return bool
 				},
 			},
-			"created" : {
-				Type: schema.TypeString,
+			"created": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"modified" : {
-				Type: schema.TypeString,
+			"modified": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 		},
