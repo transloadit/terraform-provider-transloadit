@@ -64,11 +64,12 @@ The following arguments are supported:
 
 ## Attributes Reference
 
-- `id` - The Template ID reference from Transloadit, e.g. `908ab54f2c4b479184db637709320c85`
-- `name` - The Template Slug reference from Transloadit, e.g. `my-terraform-template`
+- `id` - The Template credential ID reference from Transloadit, e.g. `908ab54f2c4b479184db637709320c85`
+- `name` - The Template credential Slug reference from Transloadit, e.g. `S3_CREDENTIALS`
 - `type` -  Json of the template credential
-- `content` - The Template's Assembly Instructions as a JSON string, e.g. `{ "steps": { ... } }`
-- `created` - Creation date of the templace 
+- `content` - The Template credential content
+- `created` - Creation date of the template credential
+- `modified` - Last modified date of the template credential
 
 ## Update 
 

@@ -11,8 +11,8 @@ import (
 func TestAccTemplateCredential_basic(t *testing.T) {
 
 	randInt := rand.Int() % 1000
-	template1_name := fmt.Sprintf("templatebasic%d", randInt)
-	template2_name := fmt.Sprintf("templatebasic%d", randInt+1)
+	template1_name := fmt.Sprintf("templatecredentialbasic%d", randInt)
+	template2_name := fmt.Sprintf("templatecredentialbasic%d", randInt+1)
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
