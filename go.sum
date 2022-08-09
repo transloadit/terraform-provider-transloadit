@@ -312,6 +312,8 @@ github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5Cc
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/transloadit/go-sdk v1.4.1 h1:Op8dm6PB6sr42fiTyIDukxqyWJSm6NvI3X/d9DLP69c=
 github.com/transloadit/go-sdk v1.4.1/go.mod h1:4gUsTnUsd4S+liSsPH3VUXJZOW4WMMXS0Rwd1BAf4Vs=
+github.com/transloadit/go-sdk v1.5.0 h1:F34b1DcNMnjg10MBwiRX36mBRDYRAUMWGuTwU3fWHUQ=
+github.com/transloadit/go-sdk v1.5.0/go.mod h1:4gUsTnUsd4S+liSsPH3VUXJZOW4WMMXS0Rwd1BAf4Vs=
 github.com/ulikunitz/xz v0.5.8 h1:ERv8V6GKqVi23rgu5cj9pVfVzJbOqAY2Ntl88O6c2nQ=
 github.com/ulikunitz/xz v0.5.8/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
 github.com/vmihailenco/msgpack v3.3.3+incompatible h1:wapg9xDUZDzGCNFlwc5SqI1rvcciqcxEHac4CYj89xI=
