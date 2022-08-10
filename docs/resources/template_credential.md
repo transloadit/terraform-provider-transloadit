@@ -66,7 +66,7 @@ The following arguments are supported:
 
 - `id` - The Template credential ID reference from Transloadit, e.g. `908ab54f2c4b479184db637709320c85`
 - `name` - The Template credential Slug reference from Transloadit, e.g. `S3_CREDENTIALS`
-- `type` -  Json of the template credential
+- `type` -  The Template credential type
 - `content` - The Template credential content
 - `created` - Creation date of the template credential
 - `modified` - Last modified date of the template credential
