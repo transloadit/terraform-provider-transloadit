@@ -73,7 +73,8 @@ The following arguments are supported:
 
 ## Update 
 
-Currently update is not supported but will probably be available in a future release
+`name` and `content` argument can be updated without recreating template credential. 
+Change of `type` will trigger a delete/creation of the resource
 
 ## Import
 

@@ -14,6 +14,7 @@ func resourceTemplateCredential() *schema.Resource {
 		Create: resourceTemplateCredentialCreate,
 		Read:   resourceTemplateCredentialRead,
 		Delete: resourceTemplateCredentialDelete,
+		Update: resourceTemplateCredentialUpdate,
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -22,7 +23,7 @@ func resourceTemplateCredential() *schema.Resource {
 			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
+				ForceNew:    false,
 				Description: "Template credential name",
 			},
 			"type": {
@@ -34,7 +35,7 @@ func resourceTemplateCredential() *schema.Resource {
 			"content": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
+				ForceNew:    false,
 				Description: "template credential content in json",
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					bool, _ := AreEqualJSON(old, new)
@@ -97,6 +98,22 @@ func resourceTemplateCredentialDelete(d *schema.ResourceData, meta interface{}) 
 	err := client.DeleteTemplateCredential(context.Background(), d.Id())
 	return err
 }
+
+func resourceTemplateCredentialUpdate(d *schema.ResourceData, meta interface{}) error {
+	client := meta.(*transloadit.Client)
+	templateCredentialContent, err := jsonStringToTemplateCredentialContent(d.Get("content").(string))
+	if err != nil {
+		return err
+	}
+	payload := transloadit.TemplateCredential{
+		Name:    d.Get("name").(string),
+		Type:    d.Get("type").(string),
+		Content: *templateCredentialContent,
+	}
+	err = client.UpdateTemplateCredential(context.Background(), d.Id(), payload)
+	return err
+}
+
 
 func jsonStringToTemplateCredentialContent(src string) (*map[string]interface{}, error) {
 	var content map[string]interface{}

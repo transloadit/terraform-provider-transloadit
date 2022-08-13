@@ -91,7 +91,7 @@ func resourceTemplateRead(d *schema.ResourceData, meta interface{}) error {
 func resourceTemplateUpdate(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*transloadit.Client)
 	templateContent, err := jsonStringToTemplate(d.Get("template").(string))
-	if err != nil {
+	if err != nil 	{
 		return err
 	}
 	payload := transloadit.Template{
