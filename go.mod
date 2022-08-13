@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/hashicorp/terraform-plugin-sdk v1.17.2
-	github.com/transloadit/go-sdk v1.5.0
+	github.com/transloadit/go-sdk v1.5.1
 )
 
 require (
