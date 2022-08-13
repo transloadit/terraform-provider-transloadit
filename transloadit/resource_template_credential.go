@@ -114,7 +114,6 @@ func resourceTemplateCredentialUpdate(d *schema.ResourceData, meta interface{}) 
 	return err
 }
 
-
 func jsonStringToTemplateCredentialContent(src string) (*map[string]interface{}, error) {
 	var content map[string]interface{}
 	err := json.Unmarshal([]byte(src), &content)
