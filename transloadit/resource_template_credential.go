@@ -36,7 +36,7 @@ func resourceTemplateCredential() *schema.Resource {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    false,
-				Description: "template credential content in json",
+				Description: "Template credential content in JSON",
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					bool, _ := AreEqualJSON(old, new)
 					return bool
