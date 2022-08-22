@@ -23,7 +23,7 @@ type Assembly struct {
 	TemplateID string
 	// Fields specifies additional key-value pairs that can be accessed by
 	// Assembly Instructions to allow customizing steps on a per-assembly basis.
-	// See https://transloadit.com/docs/#assembly-variables
+	// See https://transloadit.com/docs/topics/assembly-instructions/#assembly-variables
 	Fields map[string]interface{}
 
 	steps   map[string]map[string]interface{}

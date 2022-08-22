@@ -313,7 +313,7 @@ github.com/posener/complete/match
 ## explicit
 github.com/spf13/afero
 github.com/spf13/afero/mem
-# github.com/transloadit/go-sdk v1.4.1
+# github.com/transloadit/go-sdk v1.5.1
 ## explicit; go 1.15
 github.com/transloadit/go-sdk
 # github.com/ulikunitz/xz v0.5.8

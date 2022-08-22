@@ -32,7 +32,8 @@ func Provider() terraform.ResourceProvider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			prefix + "template": resourceTemplate(),
+			prefix + "template":            resourceTemplate(),
+			prefix + "template_credential": resourceTemplateCredential(),
 		},
 		ConfigureFunc: configureProvider,
 	}
