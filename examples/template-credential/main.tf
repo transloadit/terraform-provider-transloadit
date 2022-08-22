@@ -5,7 +5,7 @@ resource "transloadit_template_credential" "s3" {
   {
 	"bucket" : "mybucket",
 	"bucket_region" : "us-east-1",
-        "key" : "mykey",
+	"key" : "mykey",
 	"secret" : "mysecret"
    }
 EOT
