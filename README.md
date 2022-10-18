@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/transloadit/terraform-provider-transloadit.svg?branch=master)](https://travis-ci.org/transloadit/terraform-provider-transloadit)
+[![Build Status](https://travis-ci.org/transloadit/terraform-provider-transloadit.svg?branch=main)](https://travis-ci.org/transloadit/terraform-provider-transloadit)
 
 # Transloadit Terraform Provider
 
