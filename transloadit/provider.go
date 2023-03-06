@@ -4,14 +4,13 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	transloadit "github.com/transloadit/go-sdk"
 )
 
 const prefix = "transloadit_"
 
-func Provider() terraform.ResourceProvider {
-	return &schema.Provider{
+func Provider() schema.Provider {
+	return schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"auth_key": {
 				Type:        schema.TypeString,
