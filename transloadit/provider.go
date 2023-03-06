@@ -9,8 +9,8 @@ import (
 
 const prefix = "transloadit_"
 
-func Provider() schema.Provider {
-	return schema.Provider{
+func Provider() *schema.Provider {
+	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"auth_key": {
 				Type:        schema.TypeString,
