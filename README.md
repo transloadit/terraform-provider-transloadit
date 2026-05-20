@@ -138,4 +138,4 @@ make testacc
 
 ### Releasing
 
-GitHub Actions is set up to automatically build and release draft artifacts onto GitHub Releases upon pushing e.g. a `v0.2.0` tag. Release notes are kept in [CHANGELOG.md](./CHANGELOG.md); copy the matching version entry into the draft GitHub Release before publishing it.
+GitHub Actions is set up to automatically build and release draft artifacts onto GitHub Releases upon pushing e.g. a `v0.2.0` tag.
