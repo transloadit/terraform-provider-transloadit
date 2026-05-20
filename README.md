@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/transloadit/terraform-provider-transloadit.svg?branch=main)](https://travis-ci.org/transloadit/terraform-provider-transloadit)
+[![CI](https://github.com/transloadit/terraform-provider-transloadit/actions/workflows/ci.yml/badge.svg)](https://github.com/transloadit/terraform-provider-transloadit/actions/workflows/ci.yml)
 
 # Transloadit Terraform Provider
 
@@ -109,7 +109,7 @@ terraform plan
 
 ### Developing the Provider
 
-If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.13+ is *required*). You'll also need to correctly setup a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
+If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.25.8+ is *required*). You'll also need to correctly set up a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
 
 To compile the provider, run `make build`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
@@ -138,4 +138,4 @@ make testacc
 
 ### Releasing
 
-Travis CI is set up to automatically build and release artifacts onto GitHub Releases upon pushing e.g. a `v0.2.0` tag to the master branch.
+GitHub Actions is set up to automatically build and release draft artifacts onto GitHub Releases upon pushing e.g. a `v0.2.0` tag.

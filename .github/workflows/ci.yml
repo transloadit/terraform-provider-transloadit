@@ -2,61 +2,62 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
-    env: 
-      GOFLAGS: "-mod=vendor"
+    env:
+      GOFLAGS: '-mod=vendor'
       HAS_ACC_SECRETS: ${{ secrets.TRANSLOADIT_AUTH_KEY != '' && secrets.TRANSLOADIT_AUTH_SECRET != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        golang: ["1.23", "1.24"]
+        golang: ['1.25.x', '1.26.x']
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: ${{ matrix.golang }}
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.golang }}
 
-    - name: Make go vet
-      run: make vet
+      - name: Make go vet
+        run: make vet
 
-    - name: Unit Tests
-      run: make test
+      - name: Unit Tests
+        run: make test
 
-    - name: Acceptance Tests 
-      if: env.HAS_ACC_SECRETS == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: make testacc
-      env:
-        TRANSLOADIT_AUTH_KEY: ${{ secrets.TRANSLOADIT_AUTH_KEY }}
-        TRANSLOADIT_AUTH_SECRET: ${{ secrets.TRANSLOADIT_AUTH_SECRET }}
-    - name: Acceptance Tests skipped
-      if: env.HAS_ACC_SECRETS != 'true' || github.event_name != 'push' || github.ref != 'refs/heads/main'
-      run: echo "Skipping acceptance tests because credentials are not available in this context."
+      - name: Acceptance Tests
+        if: env.HAS_ACC_SECRETS == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: make testacc
+        env:
+          TRANSLOADIT_AUTH_KEY: ${{ secrets.TRANSLOADIT_AUTH_KEY }}
+          TRANSLOADIT_AUTH_SECRET: ${{ secrets.TRANSLOADIT_AUTH_SECRET }}
 
-  build: 
-    env: 
-      GOFLAGS: "-mod=vendor"
+      - name: Acceptance Tests skipped
+        if: env.HAS_ACC_SECRETS != 'true' || github.event_name != 'push' || github.ref != 'refs/heads/main'
+        run: echo "Skipping acceptance tests because credentials are not available in this context."
+
+  build:
+    env:
+      GOFLAGS: '-mod=vendor'
     runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [windows, linux, darwin]
         arch: [amd64]
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: "1.24"
-        
-    - name: Build on ${{ matrix.os}}_${{matrix.arch}}
-      run: make build
-      env: 
-        GOOS: ${{ matrix.os }}
-        GOARCH: ${{ matrix.arch }}
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.x'
+
+      - name: Build on ${{ matrix.os }}_${{ matrix.arch }}
+        run: make build
+        env:
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}

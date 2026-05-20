@@ -21,7 +21,6 @@ sweep:
 	go test $(TEST) -v -sweep=$(SWEEP) $(SWEEPARGS)
 
 test: fmtcheck
-	go test -i $(TEST) || exit 1
 	echo $(TEST) | \
 		xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=10
 
