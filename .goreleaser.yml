@@ -42,6 +42,8 @@ signs:
       - "--batch"
       - "--pinentry-mode"
       - "loopback"
+      - "--passphrase-file"
+      - "{{ .Env.GPG_PASSPHRASE_FILE }}"
       - "-u"
       - "{{ .Env.GPG_FINGERPRINT }}"
       - "--output"
