@@ -391,7 +391,7 @@ service Provider {
 
     // CallFunction runs the provider-defined function logic and returns
     // the result with any diagnostics.
-    rpc CallFunction(CallFunction.Request) returns (CallFunction.Response);
+    rpc CallFunction(CallFunction.Request) returns (CallFunction.Response);   
 
     //////// Actions Lifecycle
     rpc ValidateActionConfig(ValidateActionConfig.Request) returns (ValidateActionConfig.Response);
